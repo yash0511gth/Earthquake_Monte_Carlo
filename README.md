@@ -16,20 +16,24 @@ The model uses:
 
 ## Data Sources
 
-Earthquake frequency data:
-USGS Earthquake Hazards Program
+**Earthquake frequency and magnitude data:**  
+U.S. Geological Survey (USGS), Earthquake Hazards Program — Lists, Maps, and Statistics
 
-Loss assumptions:
-Economic damage estimates based on historical earthquake loss studies.
+**Loss assumptions:**  
+Federal Reserve Bank of Kansas City, *Economic Damage from Large Earthquakes*
+
+Detailed sources, assumptions, and methodology are documented in `docs/MODEL_DEVELOPMENT.md`.
 
 ## Current Progress
 
 Completed:
-- Data organization and model parameter setup
-- Earthquake frequency modeling using Poisson distribution
+
+- Data organization and model parameter setup — `data/Data_Earthquake Monte Carlo.xlsx`
+- Earthquake frequency modeling using Poisson distribution — `scripts/frequency_model.py`
+- Earthquake severity modeling using Uniform distribution — `scripts/severity_model.py`
 
 Next:
-- Severity modeling
+
 - Monte Carlo simulation engine
 - Risk metrics
 - Tableau visualization
