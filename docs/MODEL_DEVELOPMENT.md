@@ -209,3 +209,219 @@ The implementation is contained in:
 
 ---
 
+## Part 3 — Monte Carlo Simulation
+
+The Monte Carlo stage combines the frequency and severity models developed in Part 2 to simulate possible annual earthquake losses.
+
+The objective is to generate 10,000 possible earthquake years, calculate the total financial loss for each year, evaluate the resulting risk distribution, and visualize the results.
+
+Part 3 consists of three components:
+
+1. Monte Carlo Engine — combines Poisson frequency sampling and Uniform severity sampling.
+2. Risk Metrics — calculates summary statistics, percentile risk, and tail risk.
+3. Visualization — produces statistical plots in Python and presentation-ready visualizations in Tableau.
+
+### 3.1 Monte Carlo Engine
+
+#### Objective
+
+The objective of the Monte Carlo engine is to simulate 10,000 possible earthquake years and calculate the total financial loss associated with each simulated year.
+
+Each simulated year combines the two models developed in Part 2:
+
+- Frequency model — determines how many earthquakes occur in each magnitude group using a Poisson distribution.
+- Severity model — determines the financial loss associated with each earthquake using a Uniform Distribution.
+
+The total annual loss is calculated by summing the simulated losses from all earthquake events occurring within each simulated year.
+
+#### Python Implementation
+
+The Monte Carlo script was built in several stages.
+
+**1. Project path extraction**
+
+`pathlib.Path` was used to identify the project root and construct the path to the Excel workbook containing the model parameters.
+
+**2. Data loading**
+
+`pandas.read_excel()` loads the `model_parameters` worksheet containing the average annual frequencies and financial loss ranges for each magnitude group.
+
+**3. Simulation setup**
+
+The simulation was configured to generate 10,000 independent simulated years.
+
+**4. Frequency sampling**
+
+For each simulated year and magnitude group, NumPy's `np.random.poisson()` function generates the number of earthquake events using the corresponding average annual frequency (λ).
+
+**5. Severity sampling**
+
+For each simulated earthquake event, NumPy's `np.random.uniform()` function generates a financial loss between the minimum and maximum loss assumptions for that magnitude group.
+
+**6. Annual loss calculation**
+
+The losses from all simulated earthquake events within a year are summed to produce the total annual financial loss.
+
+**7. Results output**
+
+The 10,000 simulated annual loss outcomes are stored in a CSV file for use in the risk metrics and visualization stages.
+
+**Libraries used:**
+
+- `pathlib` — project path and file-location management
+- `pandas` — Excel data loading and DataFrame manipulation
+- `numpy` — Poisson and Uniform random sampling
+
+The implementation is contained in:
+
+`scripts/monte_carlo.py`
+
+Output:
+
+`results/simulated_annual_losses.csv`
+
+---
+
+### 3.2 Risk Metrics
+
+#### Objective
+
+The objective of the risk metrics stage is to evaluate the distribution of simulated annual earthquake losses and quantify the potential financial exposure.
+
+The analysis includes summary statistics, percentile risk measures, and tail-risk analysis.
+
+#### Summary Statistics
+
+The following statistics are calculated from the 10,000 simulated annual losses:
+
+- Mean
+- Median
+- Minimum
+- Maximum
+- 25th percentile
+- 75th percentile
+
+The results from the current simulation are:
+
+| Metric | Result |
+|---|---:|
+| Mean annual loss | $139.20B |
+| Median annual loss | $125.67B |
+| Minimum annual loss | $42.92B |
+| Maximum annual loss | $498.37B |
+| 25th percentile | $98.91B |
+| 75th percentile | $169.60B |
+
+#### Percentile Risk
+
+Two high-loss percentiles were calculated:
+
+| Risk Measure | Result |
+|---|---:|
+| 95th percentile | $244.54B |
+| 99th percentile | $308.64B |
+
+The 95th percentile represents a loss level exceeded by approximately 5% of simulated years.
+
+The 99th percentile represents a loss level exceeded by approximately 1% of simulated years.
+
+#### Tail Risk
+
+A loss threshold of $200 billion was selected to evaluate exceedance risk.
+
+The probability that simulated annual losses exceed this threshold is:
+
+**13.62%**
+
+This provides an initial measure of the probability of experiencing an annual loss above a defined financial threshold.
+
+#### Python Implementation
+
+`pandas` is used to load the Monte Carlo simulation results and calculate the statistical measures.
+
+`numpy` is used for percentile calculations and numerical processing.
+
+The script also generates a separate dataset containing exceedance probabilities across a range of loss thresholds. This dataset is used to construct the tail-risk curve in Tableau.
+
+**Libraries used:**
+
+- `pathlib` — project path and file-location management
+- `pandas` — CSV loading, DataFrame creation, and statistical calculations
+- `numpy` — numerical and percentile calculations
+
+The implementation is contained in:
+
+`scripts/risk_metrics.py`
+
+Outputs:
+
+- `results/risk_metrics.csv`
+- `results/tail_risk.csv`
+
+---
+
+### 3.3 Visualization
+
+The visualization stage presents the simulated annual loss distribution and the associated risk measures.
+
+Two tools were used:
+
+1. Python — generates the underlying statistical visualizations.
+2. Tableau — presents the simulation results in an interactive, presentation-ready format.
+
+#### Python Visualizations
+
+The Python visualization script loads the simulated annual loss results from the Monte Carlo engine and produces four visualizations:
+
+**1. Histogram**
+
+Shows the distribution of the 10,000 simulated annual losses.
+
+**2. Boxplot**
+
+Shows the median, quartiles, overall spread, and potential high-loss outliers.
+
+**3. Cumulative Distribution Function (CDF)**
+
+Shows the cumulative probability of annual losses being less than or equal to a given loss level.
+
+**4. Tail Risk Curve**
+
+Shows the probability that annual loss exceeds a given loss threshold.
+
+The implementation is contained in:
+
+`scripts/visualization.py`
+
+The visualizations are saved under:
+
+`results/visualizations/`
+
+#### Tableau Visualization
+
+The Python-generated results were then loaded into Tableau to create presentation-ready versions of the same four visualizations:
+
+- Annual Loss Distribution — Histogram
+- Annual Loss Boxplot
+- Annual Loss CDF
+- Annual Earthquake Loss Tail Risk Curve
+
+The Tableau workbook is stored in:
+
+`tableau/earthquake_risk_dashboard.twbx`
+
+The Tableau visualizations were validated against the Python risk calculations. In particular:
+
+- $200B loss threshold → 13.62% exceedance probability
+- 95th percentile → $244.54B
+- 99th percentile → $308.64B
+
+This ensures that the presentation layer is consistent with the underlying Python calculations.
+
+---
+
+## Part 4 — Evaluation Report
+
+To be continued.
+
+The next stage will use the results generated throughout Part 3 to evaluate the model, interpret the simulated loss distribution, discuss the modeling assumptions and limitations, and generate a final evaluation report.
