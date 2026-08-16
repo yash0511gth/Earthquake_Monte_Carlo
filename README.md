@@ -26,14 +26,19 @@ Detailed sources, assumptions, and methodology are documented in `docs/MODEL_DEV
 
 ## Current Progress
 
-Completed:
+### Completed
 
-- Data organization and model parameter setup — `data/Data_Earthquake Monte Carlo.xlsx`
-- Earthquake frequency modeling using Poisson distribution — `scripts/frequency_model.py`
-- Earthquake severity modeling using Uniform distribution — `scripts/severity_model.py`
+- Data preparation and model parameter setup
+- Frequency modeling — `scripts/frequency_model.py`
+- Severity modeling — `scripts/severity_model.py`
+- Monte Carlo simulation engine — `scripts/monte_carlo.py`
+- Risk metrics — `scripts/risk_metrics.py`
+- Python visualizations — `scripts/visualization.py`
+- Tableau presentation — `tableau/earthquake_risk_dashboard.twbx`
 
-Next:
+### Next
 
-- Monte Carlo simulation engine
-- Risk metrics
-- Tableau visualization
+- Evaluation report
+- Model interpretation and discussion
+- Model limitations and assumptions
+- Final conclusions and references
