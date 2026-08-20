@@ -1,7 +1,7 @@
 """
 frequency_model.py
 
-Part 2: Frequency Modeling
+Part 2.1: Frequency Modeling
 
 Purpose:
 Read the earthquake model parameters from Excel.

@@ -420,8 +420,32 @@ This ensures that the presentation layer is consistent with the underlying Pytho
 
 ---
 
-## Part 4 — Evaluation Report
+## Part 4 — Risk Analysis
 
-To be continued.
+The evaluation stage uses the simulation results generated throughout Part 3 to develop a quantitative risk analysis of the modeled earthquake losses.
 
-The next stage will use the results generated throughout Part 3 to evaluate the model, interpret the simulated loss distribution, discuss the modeling assumptions and limitations, and generate a final evaluation report.
+### 4.1 Simulation Results
+
+This section presents and interprets the numerical results produced by the 10,000 simulated earthquake years, including:
+
+- Overview
+- Summary statistics
+- Metric Interpretation
+    -  Mean and median annual loss
+    - Quartiles
+    - 95th and 99th percentiles
+    - Minimum and maximum simulated losses
+    - Tail-risk measures
+- Visualization of Simulation Results
+    - Histogram
+    - Boxplot
+    - CDF
+    - Tail-risk curve
+
+### 4.2 Risk Interpretation
+
+
+### 4.3 Risk Implications
+
+
+The completed risk analysis will provide the transition from the technical simulation engine to the broader quantitative and practical interpretation of the model results.

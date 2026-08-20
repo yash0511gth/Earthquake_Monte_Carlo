@@ -35,10 +35,11 @@ Detailed sources, assumptions, and methodology are documented in `docs/MODEL_DEV
 - Risk metrics — `scripts/risk_metrics.py`
 - Python visualizations — `scripts/visualization.py`
 - Tableau presentation — `tableau/earthquake_risk_dashboard.twbx`
+- Risk Analysis: Simulation Results — `docs/RISK_ANALYSIS/SIMULATION_RESULTS.md`
 
 ### Next
 
-- Evaluation report
-- Model interpretation and discussion
+- Risk Interpretation
+- Risk Implications
 - Model limitations and assumptions
 - Final conclusions and references

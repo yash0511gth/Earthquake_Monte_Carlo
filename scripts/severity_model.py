@@ -1,7 +1,7 @@
 """
 severity_model.py
 
-Part 3: Severity Modeling
+Part 2.2: Severity Modeling
 
 Purpose:
 Read the earthquake model parameters from Excel.
